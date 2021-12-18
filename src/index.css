@@ -25,6 +25,7 @@ header {
 .canvas-wrapper {
     width: 100%;
     display: flex;
+    box-shadow: 0 0 16px 4px rgba(0, 0, 0, 0.2);
 }
 
 aside {
