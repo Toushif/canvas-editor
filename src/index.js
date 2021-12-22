@@ -219,6 +219,7 @@ function calculateAngle(start, current) {
 
     return angle;
 }
+
 function drag(event) {
     var position;
     if (dragging === true) {
