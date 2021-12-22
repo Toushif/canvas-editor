@@ -42,25 +42,25 @@ var canvas,
 
 //define mouse coordinates
 function getCanvasCoordinates(event) {
-    var x = event.clientX - canvas.getBoundingClientRect().left;
-    var y = event.clientY - canvas.getBoundingClientRect().top;
+    var x = event.clientX - canvas.offsetLeft;
+    var y = event.clientY - canvas.offsetTop;
 
     //return object where x is x and y is y
-    return { x: x, y: y };
+    return { x, y };
 }
 
 //this avoids dragging the image
 //The getImageData() method returns an ImageData object that copies the pixel data for the specified rectangle on a canvas.
 function takeSnapShot() {
-    snapshot = context.getImageData(0, 0, canvas.width, canvas.height);
+    snapshot = context.getImageData(0, 0, canvas.offsetWidth, canvas.offsetHeight);
 }
 //These must be added to dragStart()
 function restoreSnapShot() {
     context.putImageData(snapshot, 0, 0);
 }
 
-// Added new function to enable canvas drawing
-function drawPencil(position) {
+// Draw the pencil lines
+function drawPencilLines(position) {
     context.beginPath();
     context.moveTo(dragStartLocation.x, dragStartLocation.y);
     context.lineTo(position.x, position.y);
@@ -68,6 +68,15 @@ function drawPencil(position) {
     context.lineWidth = 2;
     context.stroke();
     context.closePath();
+}
+
+// Added new function to enable canvas drawing
+function drawPencil(position) {
+    context.beginPath();
+    context.fillStyle = "black";
+    context.fillRect(position.x, position.y, 2, 2);
+    context.closePath();
+    drawPencilLines(position);
 }
 
 function drawLine(position) {
@@ -171,7 +180,7 @@ function draw(position) {
     context.lineCap = lineCap;
 
     //we don't need even't handlers because before drawing we are jsut taking a default value
-    debugger;
+    // debugger;
     if (shape === "pencil") {
         drawPencil(position);
     }
@@ -262,14 +271,14 @@ function changeStrokeStyle() {
 function changeBackgroundColor() {
     context.save();
     context.fillStyle = document.getElementById("backgroundColor").value;
-    context.fillRect(0, 0, canvas.width, canvas.height);
+    context.fillRect(0, 0, canvas.offsetWidth, canvas.offsetHeight);
     context.restore();
 
     //more info on save() and resote() www.html5.litten.com/understanding-save-and-restore-for-the-canvas-context/
 }
 
 function eraseCanvas() {
-    context.clearRect(0, 0, canvas.width, canvas.height);
+    context.clearRect(0, 0, canvas.offsetWidth, canvas.offsetHeight);
 }
 
 //write on canvas
