@@ -52,7 +52,7 @@ function getCanvasCoordinates(event) {
     currY = event.clientY - canvas.offsetTop;
 
     //return object where x is x and y is y
-    return { x, y };
+    return { x: currX, y: currY };
 }
 
 //this avoids dragging the image
@@ -66,23 +66,25 @@ function restoreSnapShot() {
 }
 
 // Draw the pencil lines
-function drawPencilLines(position) {
-    context.beginPath();
-    context.moveTo(dragStartLocation.x, dragStartLocation.y);
-    context.lineTo(position.x, position.y);
-    context.strokeStyle = "black";
-    context.lineWidth = 2;
-    context.stroke();
-    context.closePath();
-}
+// function drawPencilLines(position) {
+//     context.beginPath();
+//     context.moveTo(prevX, prevY);
+//     context.lineTo(currX, currY);
+//     context.strokeStyle = "black";
+//     context.lineWidth = 2;
+//     context.stroke();
+//     context.closePath();
+// }
 
 // Added new function to enable canvas drawing
 function drawPencil(position) {
     context.beginPath();
-    context.fillStyle = "black";
-    context.fillRect(position.x, position.y, 2, 2);
+    context.moveTo(prevX, prevY);
+    context.lineTo(currX, currY);
+    context.strokeStyle = "black";
+    context.lineWidth = 2;
+    context.stroke();
     context.closePath();
-    drawPencilLines(position);
 }
 
 function drawLine(position) {
@@ -213,11 +215,11 @@ function draw(position) {
     } else {
         context.globalCompositeOperation = "source-over";
     }
-    if (fillBox.checked) {
-        context.fill();
-    } else {
-        context.stroke();
-    }
+    // if (fillBox.checked) {
+    //     context.fill();
+    // } else {
+    //     context.stroke();
+    // }
 }
 
 //define dragstart, drag and dragStop
@@ -229,7 +231,7 @@ function dragStart(event) {
     context.fillStyle = 'black';
     context.fillRect(currX, currY, 2, 2);
     context.closePath();
-    
+
     takeSnapShot();
 }
 
@@ -243,6 +245,11 @@ function calculateAngle(start, current) {
 
 function drag(event) {
     var position;
+    prevX = currX;
+    prevY = currY;
+    currX = e.clientX - canvas.offsetLeft;
+    currY = e.clientY - canvas.offsetTop;
+
     if (dragging === true) {
         restoreSnapShot();
         position = getCanvasCoordinates(event);
