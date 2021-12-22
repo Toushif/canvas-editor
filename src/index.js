@@ -58,6 +58,7 @@ function takeSnapShot() {
 function restoreSnapShot() {
     context.putImageData(snapshot, 0, 0);
 }
+
 // Added new function to enable canvas drawing 
 function drawPencil(position) {
     context.beginPath();
