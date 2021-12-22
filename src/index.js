@@ -171,7 +171,7 @@ function draw(position) {
     context.lineCap = lineCap;
 
     //we don't need even't handlers because before drawing we are jsut taking a default value
-
+            debugger
     if (shape === "pencil") {
         drawPencil(position);
     }
@@ -211,6 +211,7 @@ function dragStart(event) {
     dragStartLocation = getCanvasCoordinates(event);
     takeSnapShot();
 }
+
 function calculateAngle(start, current) {
     var angle =
         360 -
