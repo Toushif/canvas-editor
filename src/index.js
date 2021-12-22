@@ -31,7 +31,11 @@ var canvas,
     context,
     dragging = false, //this will be dragging if mouse move is followed by mouse down
     dragStartLocation,
-    snapshot;
+    snapshot,
+    prevX = 0,
+    currX = 0,
+    prevY = 0,
+    currY = 0;
 
 //getBoundingClientRect
 //The returned value is a DOMRect object, which contains read-only left, top, right and
@@ -42,8 +46,10 @@ var canvas,
 
 //define mouse coordinates
 function getCanvasCoordinates(event) {
-    var x = event.clientX - canvas.offsetLeft;
-    var y = event.clientY - canvas.offsetTop;
+    prevX = currX;
+    prevY = currY;
+    currX = event.clientX - canvas.offsetLeft;
+    currY = event.clientY - canvas.offsetTop;
 
     //return object where x is x and y is y
     return { x, y };
@@ -218,6 +224,12 @@ function draw(position) {
 function dragStart(event) {
     dragging = true;
     dragStartLocation = getCanvasCoordinates(event);
+
+    context.beginPath();
+    context.fillStyle = 'black';
+    context.fillRect(currX, currY, 2, 2);
+    context.closePath();
+    
     takeSnapShot();
 }
 
