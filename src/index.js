@@ -59,12 +59,12 @@ function restoreSnapShot() {
     context.putImageData(snapshot, 0, 0);
 }
 
-// Added new function to enable canvas drawing 
+// Added new function to enable canvas drawing
 function drawPencil(position) {
     context.beginPath();
     context.moveTo(dragStartLocation.x, dragStartLocation.y);
     context.lineTo(position.x, position.y);
-    context.strokeStyle = 'black';
+    context.strokeStyle = "black";
     context.lineWidth = 2;
     context.stroke();
     context.closePath();
@@ -171,7 +171,7 @@ function draw(position) {
     context.lineCap = lineCap;
 
     //we don't need even't handlers because before drawing we are jsut taking a default value
-            debugger
+    debugger;
     if (shape === "pencil") {
         drawPencil(position);
     }
@@ -246,6 +246,7 @@ function changeLineWidth() {
     //event.stopPropagation() prevents the vent from bubblim up the DOM tree, preventing any parent handlers from being notified of the event.
     event.stopPropagation();
 }
+
 //Fill Color
 function changeFillStyle() {
     context.fillStyle = this.value;
