@@ -245,12 +245,13 @@ function calculateAngle(start, current) {
 
 function drag(event) {
     var position;
-    prevX = currX;
-    prevY = currY;
-    currX = e.clientX - canvas.offsetLeft;
-    currY = e.clientY - canvas.offsetTop;
-
+    
     if (dragging === true) {
+        prevX = currX;
+        prevY = currY;
+        currX = event.clientX - canvas.offsetLeft;
+        currY = event.clientY - canvas.offsetTop;
+        
         restoreSnapShot();
         position = getCanvasCoordinates(event);
         //generic
