@@ -65,17 +65,6 @@ function restoreSnapShot() {
     context.putImageData(snapshot, 0, 0);
 }
 
-// Draw the pencil lines
-// function drawPencilLines(position) {
-//     context.beginPath();
-//     context.moveTo(prevX, prevY);
-//     context.lineTo(currX, currY);
-//     context.strokeStyle = "black";
-//     context.lineWidth = 2;
-//     context.stroke();
-//     context.closePath();
-// }
-
 // Added new function to enable canvas drawing
 function drawPencil(position) {
     context.beginPath();
@@ -251,7 +240,7 @@ function drag(event) {
         prevY = currY;
         currX = event.clientX - canvas.offsetLeft;
         currY = event.clientY - canvas.offsetTop;
-        
+
         restoreSnapShot();
         position = getCanvasCoordinates(event);
         //generic
