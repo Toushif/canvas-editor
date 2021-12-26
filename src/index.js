@@ -221,7 +221,7 @@ function dragStart(event) {
     context.fillRect(currX, currY, 2, 2);
     context.closePath();
 
-    takeSnapShot();
+    // takeSnapShot();
 }
 
 function calculateAngle(start, current) {
