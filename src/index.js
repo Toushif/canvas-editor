@@ -58,7 +58,12 @@ function getCanvasCoordinates(event) {
 //this avoids dragging the image
 //The getImageData() method returns an ImageData object that copies the pixel data for the specified rectangle on a canvas.
 function takeSnapShot() {
-    snapshot = context.getImageData(0, 0, canvas.offsetWidth, canvas.offsetHeight);
+    snapshot = context.getImageData(
+        0,
+        0,
+        canvas.offsetWidth,
+        canvas.offsetHeight
+    );
 }
 //These must be added to dragStart()
 function restoreSnapShot() {
@@ -217,7 +222,7 @@ function dragStart(event) {
     dragStartLocation = getCanvasCoordinates(event);
 
     context.beginPath();
-    context.fillStyle = 'black';
+    context.fillStyle = "black";
     context.fillRect(currX, currY, 2, 2);
     context.closePath();
 
@@ -234,7 +239,7 @@ function calculateAngle(start, current) {
 
 function drag(event) {
     var position;
-    
+
     if (dragging === true) {
         prevX = currX;
         prevY = currY;
